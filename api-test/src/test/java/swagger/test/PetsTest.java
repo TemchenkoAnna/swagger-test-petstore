@@ -28,7 +28,6 @@ public class PetsTest {
     private final PetApiService petApiService = new PetApiService();
     private final PetCreateService petCreateService = new PetCreateService();
     private static Faker faker;
-    private final String CATEGORY = "Dog";
 
     @BeforeAll
     public static void setUp() {
@@ -39,7 +38,6 @@ public class PetsTest {
 
     @Story("Create a pet with valid data")
     @Severity(SeverityLevel.CRITICAL)
-
     @Test
     public void testCanAddPetToTheStore() {
         String name = faker.funnyName().name();
@@ -54,7 +52,8 @@ public class PetsTest {
         assertEquals(name, response.getName());
         assertEquals(id, response.getId());
     }
-
+    @Story("Update pet's status")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void updatePetById() {
         String name = faker.funnyName().name();
@@ -73,7 +72,8 @@ public class PetsTest {
         assertEquals("sold", response.getStatus());
         assertEquals(id, response.getId());
     }
-
+    @Story("Get pets by tag")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void getPetByTag() {
         String name = faker.funnyName().name();
