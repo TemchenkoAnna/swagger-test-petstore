@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 build/
 out/
+.allure/
 
 .idea/modules.xml
 .idea/jarRepositories.xml

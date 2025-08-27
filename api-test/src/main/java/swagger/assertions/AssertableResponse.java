@@ -1,5 +1,6 @@
 package swagger.assertions;
 
+import io.qameta.allure.Step;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public class AssertableResponse {
         this.response = pet;
     }
 
+    @Step("Then Api response should have {condition}")
     public AssertableResponse shouldHave(Condition condition) {
         log.info("About to check condition {}", condition);
         condition.check(response);
