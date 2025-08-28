@@ -16,7 +16,7 @@ public class Conditions {
 
     }
 
-    public JsonSchemaValidation jsonSchema(String jsonPath) throws IOException {
+    public static JsonSchemaValidation jsonSchema(String jsonPath) throws IOException {
         return new JsonSchemaValidation(jsonPath);
     }
 }

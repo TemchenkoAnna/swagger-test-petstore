@@ -14,8 +14,7 @@ import org.aeonbits.owner.ConfigFactory;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static swagger.conditions.Conditions.bodyField;
-import static swagger.conditions.Conditions.statusCode;
+import static swagger.conditions.Conditions.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -59,7 +58,7 @@ public class PetsTest {
     @Story("Update pet's status")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    public void updatePetById() {
+    public void testUpdatePetById() {
         String name = faker.funnyName().name();
         int id = faker.random().nextInt(1, 1000);
 
@@ -80,7 +79,7 @@ public class PetsTest {
     @Story("Get pets by tag")
     @Severity(SeverityLevel.CRITICAL)
     @Test
-    public void getPetByTag() {
+    public void testGetPetByTag() {
         String name = faker.funnyName().name();
         String tagName = "TestTagString354";
         int id = faker.random().nextInt(1, 1000);
@@ -97,7 +96,7 @@ public class PetsTest {
     @Story("Get pets by id")
     @Severity(SeverityLevel.CRITICAL)
     @Test
-    public void getPetById() {
+    public void testGetPetById() {
         String name = faker.funnyName().name();
         int id = faker.random().nextInt(1, 1000);
         PetPayload pet = petCreateService
@@ -115,7 +114,7 @@ public class PetsTest {
     @CsvSource({"available",
             "pending",
             "sold"})
-    public void getPetByStatus(String status) {
+    public void testGetPetByStatus(String status) {
 
         petApiService.getPetByStatus(status)
                 .shouldHave(statusCode(200))
@@ -124,4 +123,3 @@ public class PetsTest {
 
     }
 }
-
