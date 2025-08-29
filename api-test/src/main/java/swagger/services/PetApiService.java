@@ -6,14 +6,14 @@ import swagger.assertions.AssertableResponse;
 import swagger.payloads.PetPayload;
 
 public class PetApiService extends ApiService {
-    public static final String basePath = "pet";
+    public static final String BASE_PATH = "pet";
 
     @Step
     public AssertableResponse addPetToStore(PetPayload pet) {
         return new AssertableResponse(setup()
                 .body(pet)
                 .when()
-                .post(basePath));
+                .post(BASE_PATH));
     }
 
     @Step
@@ -21,13 +21,13 @@ public class PetApiService extends ApiService {
         return new AssertableResponse(setup()
                 .body(pet)
                 .when()
-                .put(basePath));
+                .put(BASE_PATH));
     }
 
     @Step
     public AssertableResponse getPetByTag(String tagName) {
         return new AssertableResponse(setup()
-                .basePath(basePath + "/findByTags")
+                .basePath(BASE_PATH + "/findByTags")
                 .and()
                 .queryParam("tags", tagName)
                 .get());
@@ -36,7 +36,7 @@ public class PetApiService extends ApiService {
     @Step
     public AssertableResponse getPetById(int id) {
         return new AssertableResponse(setup()
-                .basePath(basePath + "/{id}")
+                .basePath(BASE_PATH + "/{id}")
                 .and()
                 .pathParam("id", id)
                 .get());
@@ -45,7 +45,7 @@ public class PetApiService extends ApiService {
     @Step
     public AssertableResponse getPetByStatus(String status) {
         return new AssertableResponse(setup()
-                .basePath(basePath + "/findByStatus")
+                .basePath(BASE_PATH + "/findByStatus")
                 .and()
                 .queryParam("status", status)
                 .get());
