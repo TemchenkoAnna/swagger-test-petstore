@@ -16,6 +16,6 @@ public class BodyFieldCondition implements Condition {
 
     @Override
     public String toString() {
-        return "Body Field {" + jsonPath + matcher + '}';
+        return "Body Field {" + jsonPath + " " + matcher + '}';
     }
 }

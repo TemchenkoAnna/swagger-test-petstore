@@ -23,7 +23,7 @@ import static swagger.conditions.Conditions.*;
 
 @Epic("Petstore API")
 @Feature("Store Operations")
-public class StoreTests {
+public class StoreTest {
     private final StoreApiService storeApiService = new StoreApiService();
     private static Faker faker;
 
@@ -100,5 +100,15 @@ public class StoreTests {
         storeApiService.deleteOrder(id)
                 .shouldHave(statusCode(200));
 
+    }
+
+    @Story("Negative: Not able to get non existing order")
+    @Severity(SeverityLevel.NORMAL)
+    @Test
+    public void testNotAbleToGetOrderForPet() {
+
+        int id = faker.random().nextInt(1, 50);
+      storeApiService.getOrder(id)
+                .shouldHave(statusCode(404));
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class PetCreateService {
 
-    @Step
+    @Step("Create standard pet")
     public PetPayload createStandardPetWithParams(String name, String category, int id, String status, String tagName) {
         Category categoryObject = new Category()
                 .id(1)

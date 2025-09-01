@@ -122,4 +122,31 @@ public class PetsTest {
                 .shouldHave(bodyField("$", Matchers.notNullValue()));
 
     }
+
+    @Story("Negative: Get pets by Non existing tag")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test
+    public void testNonExistingGetPetByTag() {
+
+        String tagName = faker.funnyName().name();
+
+        petApiService.getPetByTag(tagName)
+                .shouldHave(statusCode(200))
+                .shouldHave(bodyField("", Matchers.hasSize(0)));
+
+    }
+
+    @Story("Negative: Get pets by empty and incorrect status")
+    @Severity(SeverityLevel.NORMAL)
+    @ParameterizedTest
+    @CsvSource({"''",
+            "created",
+            "123"})
+    public void testGetPetByIncorrectStatus(String status) {
+
+        petApiService.getPetByStatus(status)
+                .shouldHave(statusCode(400))
+                .shouldHave(bodyField("message", Matchers.containsString("is not in the allowable values")));
+
+    }
 }

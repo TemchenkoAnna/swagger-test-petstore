@@ -7,7 +7,7 @@ import swagger.payloads.OrderPayload;
 public class StoreApiService extends ApiService {
     public static final String BASE_PATH = "store";
 
-    @Step
+    @Step("Get inventory")
     public AssertableResponse getInventory() {
         return new AssertableResponse(setup()
                 .basePath(BASE_PATH + "/inventory")
@@ -15,7 +15,7 @@ public class StoreApiService extends ApiService {
                 .get());
     }
 
-    @Step
+    @Step("Place order for pet")
     public AssertableResponse placeOrder(OrderPayload order) {
         return new AssertableResponse(setup()
                 .basePath(BASE_PATH + "/order")
@@ -24,7 +24,7 @@ public class StoreApiService extends ApiService {
                 .post());
     }
 
-    @Step
+    @Step("Get order by ID")
     public AssertableResponse getOrder(int id) {
         return new AssertableResponse(setup()
                 .basePath(BASE_PATH + "/order" + "/{id}")
@@ -34,9 +34,10 @@ public class StoreApiService extends ApiService {
                 .get());
     }
 
+    @Step("Delete Order")
     public AssertableResponse deleteOrder(int id) {
         return new AssertableResponse(setup()
-                .basePath(BASE_PATH +"/order"+ "/{id}")
+                .basePath(BASE_PATH + "/order" + "/{id}")
                 .and()
                 .pathParam("id", id)
                 .when()

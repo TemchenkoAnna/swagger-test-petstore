@@ -8,7 +8,7 @@ import swagger.payloads.PetPayload;
 public class PetApiService extends ApiService {
     public static final String BASE_PATH = "pet";
 
-    @Step
+    @Step("Add pet to the store")
     public AssertableResponse addPetToStore(PetPayload pet) {
         return new AssertableResponse(setup()
                 .body(pet)
@@ -16,7 +16,7 @@ public class PetApiService extends ApiService {
                 .post(BASE_PATH));
     }
 
-    @Step
+    @Step("Update pet")
     public AssertableResponse updatePet(PetPayload pet) {
         return new AssertableResponse(setup()
                 .body(pet)
@@ -24,7 +24,7 @@ public class PetApiService extends ApiService {
                 .put(BASE_PATH));
     }
 
-    @Step
+    @Step("Get pet by tag")
     public AssertableResponse getPetByTag(String tagName) {
         return new AssertableResponse(setup()
                 .basePath(BASE_PATH + "/findByTags")
@@ -33,7 +33,7 @@ public class PetApiService extends ApiService {
                 .get());
     }
 
-    @Step
+    @Step("Get pet by ID")
     public AssertableResponse getPetById(int id) {
         return new AssertableResponse(setup()
                 .basePath(BASE_PATH + "/{id}")
@@ -42,7 +42,7 @@ public class PetApiService extends ApiService {
                 .get());
     }
 
-    @Step
+    @Step("Get pet by status")
     public AssertableResponse getPetByStatus(String status) {
         return new AssertableResponse(setup()
                 .basePath(BASE_PATH + "/findByStatus")
