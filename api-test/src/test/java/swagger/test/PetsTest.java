@@ -1,7 +1,6 @@
 package swagger.test;
 
 import com.github.javafaker.Faker;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import swagger.ProjectConfig;
@@ -12,7 +11,7 @@ import swagger.responces.PetResponse;
 import swagger.services.PetApiService;
 import org.aeonbits.owner.ConfigFactory;
 
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static swagger.conditions.Conditions.*;
 
@@ -89,7 +88,7 @@ public class PetsTest {
         petApiService.addPetToStore(pet);
         petApiService.getPetByTag(tagName)
                 .shouldHave(statusCode(200))
-                .shouldHave(bodyField("[0].tags[0].name", Matchers.is(tagName)));
+                .shouldHave(bodyField("[0].tags[0].name", is(tagName)));
 
     }
 
@@ -105,7 +104,7 @@ public class PetsTest {
         petApiService.addPetToStore(pet);
         petApiService.getPetById(id)
                 .shouldHave(statusCode(200))
-                .shouldHave(bodyField("name", Matchers.is(name)));
+                .shouldHave(bodyField("name", is(name)));
     }
 
     @Story("Get pets by status")
@@ -118,8 +117,8 @@ public class PetsTest {
 
         petApiService.getPetByStatus(status)
                 .shouldHave(statusCode(200))
-                .shouldHave(bodyField("status", Matchers.everyItem(equalTo(status))))
-                .shouldHave(bodyField("$", Matchers.notNullValue()));
+                .shouldHave(bodyField("status", everyItem(equalTo(status))))
+                .shouldHave(bodyField("$", notNullValue()));
 
     }
 
@@ -132,7 +131,7 @@ public class PetsTest {
 
         petApiService.getPetByTag(tagName)
                 .shouldHave(statusCode(200))
-                .shouldHave(bodyField("", Matchers.hasSize(0)));
+                .shouldHave(bodyField("", hasSize(0)));
 
     }
 
@@ -146,7 +145,7 @@ public class PetsTest {
 
         petApiService.getPetByStatus(status)
                 .shouldHave(statusCode(400))
-                .shouldHave(bodyField("message", Matchers.containsString("is not in the allowable values")));
+                .shouldHave(bodyField("message", containsString("is not in the allowable values")));
 
     }
 }

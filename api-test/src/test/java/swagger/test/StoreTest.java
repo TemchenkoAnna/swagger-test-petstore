@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import swagger.ProjectConfig;
@@ -17,6 +16,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static swagger.conditions.Conditions.*;
@@ -81,13 +81,13 @@ public class StoreTest {
         storeApiService.placeOrder(order);
         storeApiService.getOrder(id)
                 .shouldHave(statusCode(200))
-                .shouldHave(bodyField("id", Matchers.is(id)));
+                .shouldHave(bodyField("id", is(id)));
     }
 
     @Story("Delete order for Pet")
     @Severity(SeverityLevel.NORMAL)
     @Test
-      public void testDeleteOrderForPet() {
+    public void testDeleteOrderForPet() {
         int id = faker.random().nextInt(1, 5);
         OrderPayload order = new OrderPayload()
                 .id(id)
@@ -108,7 +108,7 @@ public class StoreTest {
     public void testNotAbleToGetOrderForPet() {
 
         int id = faker.random().nextInt(1, 50);
-      storeApiService.getOrder(id)
+        storeApiService.getOrder(id)
                 .shouldHave(statusCode(404));
     }
 }
